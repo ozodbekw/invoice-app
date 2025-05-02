@@ -1,0 +1,61 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@config "../tailwind.config.js";
+
+.light {
+  --background: "#F8F8FB";
+  --text: "#0C0E16";
+}
+
+.dark {
+  --background: "#141625";
+  --text: "#ffffff";
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/league-spartan-v11-latin-regular.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/league-spartan-v11-latin-500.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./fonts/league-spartan-v11-latin-600.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "League Spartan";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/league-spartan-v11-latin-700.woff2") format("woff2");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "League Spartan";
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 103px;
+  height: 100dvh;
+}
