@@ -1,4 +1,6 @@
+// components
 import { Button, Invoice } from "../components";
+import InvoiceList from "../components/InvoiceList";
 
 function Home() {
   return (
@@ -6,10 +8,10 @@ function Home() {
       {/* home top bar */}
       <div className="flex justify-between mb-[65px]">
         <div>
-          <h2 className="text-[#0C0E16] dark:text-darkText font-bold leading-[100%] text-[32px] mb-2">
+          <h2 className="text-[#0C0E16] dark:text-white font-bold leading-[100%] text-[32px] mb-2">
             Invoices
           </h2>
-          <p className="text-[#888EB0] text-[12px] leading-[15px]">
+          <p className="text-[#888EB0] dark:text-[#DFE3FA] text-[12px] leading-[15px]">
             There are 7 total invoices
           </p>
         </div>
@@ -18,35 +20,109 @@ function Home() {
             <div
               tabIndex={0}
               role="button"
-              className="m-1 bg-transparent border-0 btn"
+              className="m-1 bg-transparent shadow-0 btn"
             >
               Filter by status
             </div>
             <ul
               tabIndex={0}
-              className="p-2 shadow-sm dropdown-content menu bg-base-100 rounded-box z-1 w-52"
+              className="p-2 bg-white dark:bg-[#252945] shadow-sm dropdown-content menu rounded-box z-1 w-52"
             >
-              <li>
-                <a>Draft</a>
+              <li className="flex flex-col ">
+                <a className="relative">
+                  <svg
+                    className="absolute top-[13px] left-[15px] text-white dark:text-[#1E2139]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="none"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      d="m1.5 4.5 2.124 2.124L8.97 1.278"
+                    />
+                  </svg>
+                  <input
+                    type="checkbox"
+                    id="draft"
+                    className="w-4 h-4 form-checkbox
+                   bg-white dark:bg-[#1E2139] 
+                   border border-[#7C5DFA] appearance-none
+                   checked:bg-[#7C5DFA] 
+                   checked:text-white
+                   dark:checked:bg-[#7C5DFA] 
+                   outline-none rounded peer "
+                  />
+
+                  <label htmlFor="draft">Draft</label>
+                </a>
               </li>
-              <li>
-                <a>Pending</a>
+              <li className="flex flex-col ">
+                <a>
+                  <svg
+                    className="absolute top-[13px] left-[15px] text-white dark:text-[#1E2139]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="none"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      d="m1.5 4.5 2.124 2.124L8.97 1.278"
+                    />
+                  </svg>
+                  <input
+                    type="checkbox"
+                    id="pending"
+                    name="pending"
+                    className="w-4 h-4 form-checkbox
+                    bg-white dark:bg-[#1E2139] 
+                    border border-[#7C5DFA] appearance-none
+                    checked:bg-[#7C5DFA] 
+                    checked:text-white
+                    dark:checked:bg-[#7C5DFA] 
+                    outline-none rounded"
+                  />
+                  <label htmlFor="pending">Pending</label>
+                </a>
               </li>
-              <li>
-                <a>Paid</a>
+              <li className="flex flex-col ">
+                <a>
+                  <svg
+                    className="absolute top-[13px] left-[15px] text-white dark:text-[#1E2139]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="none"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      d="m1.5 4.5 2.124 2.124L8.97 1.278"
+                    />
+                  </svg>
+                  <input
+                    type="checkbox"
+                    id="paid"
+                    className="w-4 h-4 form-checkbox
+             bg-white dark:bg-[#1E2139] 
+             border border-[#7C5DFA] appearance-none
+             checked:bg-[#7C5DFA] 
+             checked:text-white
+             dark:checked:bg-[#7C5DFA] 
+             outline-none rounded peer"
+                  />
+                  <label htmlFor="paid">Paid</label>
+                </a>
               </li>
             </ul>
           </div>
           <Button />
         </div>
       </div>
-      <div className="flex flex-col gap-4">
-        <Invoice status={"Paid"} />
-        <Invoice status={"Draft"} />
-        <Invoice status={"Pending"} />
-        <Invoice status={"Paid"} />
-        <Invoice status={"Paid"} />
-      </div>
+      <InvoiceList />
     </div>
   );
 }

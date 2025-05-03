@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+
+// react-icons
 import { FaMoon, FaSun } from "react-icons/fa";
 
 function Sidebar() {
@@ -11,6 +13,12 @@ function Sidebar() {
     const newTheme = theme == "light" ? "dark" : "light";
     setTheme(newTheme);
   };
+
+  if (theme == "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
