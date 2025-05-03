@@ -45,12 +45,12 @@ function Sidebar() {
 
           {/* sun icon */}
 
-          <FaSun className="swap-off h-[29px]  fill-current text-[#7E88C3]  w-[29px]" />
+          <FaSun className="swap-off h-[20px]  fill-current text-[#7E88C3]  w-[20px]" />
 
           {/* moon icon */}
-          <FaMoon className="swap-on h-[29px]  fill-current text-[#7E88C3] w-[29px] " />
+          <FaMoon className="swap-on h-[20px]  fill-current text-[#7E88C3] w-[20px] " />
         </label>
-        <img className="mx-auto my-6" src="./assets/user.png" alt="hellow" />
+        <img className="mx-auto my-6" src="../assets/user.png" alt="hellow" />
       </div>
     </div>
   );
