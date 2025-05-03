@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
+import Invoice from "./pages/Invoice";
 
 function App() {
   const routes = createBrowserRouter([
@@ -12,6 +13,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/invoice/:id",
+          element: <Invoice />,
         },
       ],
     },
