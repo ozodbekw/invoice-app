@@ -59,3 +59,12 @@ body {
   width: 103px;
   height: 100dvh;
 }
+
+.invoice-top-shadow {
+  @apply shadow-none;
+  box-shadow: 0px 10px 10px -10px #48549f1a;
+}
+
+.filter-shadow {
+  box-shadow: 0px 10px 20px 0px #48549f40;
+}

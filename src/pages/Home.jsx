@@ -4,7 +4,7 @@ import InvoiceList from "../components/InvoiceList";
 
 function Home() {
   return (
-    <div className="pt-[72px]">
+    <div className="pt-[72px] pb-10">
       {/* home top bar */}
       <div className="flex justify-between mb-[65px]">
         <div>
@@ -26,7 +26,7 @@ function Home() {
             </div>
             <ul
               tabIndex={0}
-              className="p-2 bg-white dark:bg-[#252945] shadow-sm dropdown-content menu rounded-box z-1 w-52"
+              className="p-2 bg-white dark:bg-[#252945] shadow-sm dropdown-content menu rounded-box z-1 w-52 filter-shadow dark:shadow-[#00000040]"
             >
               <li className="flex flex-col ">
                 <a className="relative">

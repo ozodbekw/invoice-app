@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import users from "../../../data.json";
 
 const initialState = {
   user: null,
   isAuth: false,
+  users,
 };
 
 const userSlice = createSlice({
