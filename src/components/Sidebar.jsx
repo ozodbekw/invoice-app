@@ -26,7 +26,7 @@ function Sidebar() {
   }, [theme]);
 
   return (
-    <div className="bg-[#373B53] rounded-r-[20px] overflow-hidden flex flex-col justify-between w-[103px] h-[100dvh]">
+    <div className="bg-[#373B53] rounded-r-[20px] overflow-hidden flex flex-col justify-between w-[103px] h-[100dvh] z-10">
       <div
         className="w-[103px] h-[103px] flex bg-[#7C5DFA] justify-center items-center rounded-r-[20px]"
         style={{
@@ -39,7 +39,7 @@ function Sidebar() {
       </div>
 
       <div className="">
-        <label className="swap swap-rotate p-8 border-b-2 border-[#494E6E]">
+        <label className="swap swap-rotate p-10 border-b-2 border-[#494E6E]">
           {/* this hidden checkbox controls the state */}
           <input type="checkbox" onClick={toggleTheme} />
 
