@@ -8,7 +8,7 @@ function MainLayout() {
   return (
     <div className="flex relative h-full w-full bg-[#f8f8fb] dark:bg-[#141625] ">
       <Sidebar />
-      <main className="grow mx-auto w-full max-w-[730px] overflow-y-auto scrollbar-none h-full">
+      <main className="grow mx-auto w-full max-w-[730px] overflow-y-auto scrollbar-none h-full pr-5">
         <Outlet />
       </main>
     </div>

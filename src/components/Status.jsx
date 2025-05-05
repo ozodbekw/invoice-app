@@ -15,9 +15,9 @@ function Status({ status }) {
       dot: "bg-[#FF8F00]",
     },
     draft: {
-      text: "text-[#373B53]",
-      bg: "bg-[#373B53]/6",
-      dot: "bg-[#373B53]",
+      text: "text-[#373B53] dark:text-[#DFE3FA]",
+      bg: "bg-[#373B53]/6 dark:bg-[#DFE3FA]/6",
+      dot: "bg-[#373B53] dark:bg-[#DFE3FA]",
     },
   };
 
