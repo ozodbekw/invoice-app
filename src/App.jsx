@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import MainLayout from "./layouts/MainLayout";
+import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import Invoice from "./pages/Invoice";
+import Details from "./pages/Details";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   const routes = createBrowserRouter([
@@ -10,18 +10,12 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
-        {
-          index: true,
-          element: <Home />,
-        },
-        {
-          path: "/invoice/:id",
-          element: <Invoice />,
-        },
+        { index: true, element: <Home /> },
+        { path: "/:id", element: <Details /> },
       ],
     },
+    { path: "/*", element: <NotFound /> },
   ]);
-
   return <RouterProvider router={routes} />;
 }
 

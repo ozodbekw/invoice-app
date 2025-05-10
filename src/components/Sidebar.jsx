@@ -1,56 +1,19 @@
-import { useEffect, useState } from "react";
-
-// react-icons
-import { FaMoon, FaSun } from "react-icons/fa";
+import Logo from "../assets/logo.svg";
+import ToggleTheme from "./ToggleTheme";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function Sidebar() {
-  const themeFromLocalStorage = () => {
-    return localStorage.getItem("theme") || "light";
-  };
-
-  const [theme, setTheme] = useState(themeFromLocalStorage());
-  const toggleTheme = () => {
-    const newTheme = theme == "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
-
-  if (theme == "dark") {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
   return (
-    <div className="bg-[#373B53] rounded-r-[20px] overflow-hidden flex flex-col justify-between w-[103px] h-[100dvh] z-10">
-      <div
-        className="w-[103px] h-[103px] flex bg-[#7C5DFA] justify-center items-center rounded-r-[20px]"
-        style={{
-          backgroundImage: "url('../assets/sidebar-logo-bg.svg')",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "bottom",
-        }}
-      >
-        <img src="../assets/logo.svg" alt="site logo" />
+    <div className="bg-[#373B53] flex items-center justify-between md:flex-col md:fixed md:h-full md:left-0 md:w-[78px] md:top-0 md:bottom-0 md:z-[99]">
+      <div>
+        <img src={Logo} alt="site logo" />
       </div>
-
-      <div className="">
-        <label className="swap swap-rotate p-10 border-b-2 border-[#494E6E]">
-          {/* this hidden checkbox controls the state */}
-          <input type="checkbox" onClick={toggleTheme} />
-
-          {/* sun icon */}
-
-          <FaSun className="swap-off h-[20px]  fill-current text-[#7E88C3]  w-[20px]" />
-
-          {/* moon icon */}
-          <FaMoon className="swap-on h-[20px]  fill-current text-[#7E88C3] w-[20px] " />
-        </label>
-        <img className="mx-auto my-6" src="../assets/user.png" alt="hellow" />
+      <div className=" flex items-center gap-4 pr-5 md:pr-0 md:flex-col">
+        <ToggleTheme />
+        <Avatar className="mt-5 mb-5 mx-auto">
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </div>
     </div>
   );
