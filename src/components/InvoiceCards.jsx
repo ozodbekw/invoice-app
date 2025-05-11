@@ -46,7 +46,7 @@ function InvoiceCards() {
             clientName={clientName}
             invoiceId={invoiceId}
             createdAt={createdAt}
-            key={invoiceId}
+            key={id}
             status={status}
             total={total}
             id={id}

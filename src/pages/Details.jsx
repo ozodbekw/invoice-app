@@ -52,16 +52,7 @@ function Details() {
   if (loading) {
     return (
       <div className="mx-auto absolute left-[45vw]  top-[45vh]">
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#4fa94d"
-          ariaLabel="ball-triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
+        <span className="loader"></span>
       </div>
     );
   }
@@ -98,13 +89,12 @@ function Details() {
   }
 
   console.log(invoice);
-  console.log(invoice.senderAddress);
   return (
     <div className="py-5">
       <div className="base-container">
         <Link
           to="/"
-          className="inline-flex items-center gap-4 my-8 font-bold text-[12px] leading-[15px] text-zinc-950"
+          className="inline-flex items-center gap-4 my-8 font-bold text-[12px] leading-[15px] text-zinc-950 dark:text-white"
         >
           <ArrowLeft className="w-5" /> Go Home
         </Link>
@@ -153,7 +143,11 @@ function Details() {
                   <div className="flex flex-col gap-2">
                     <span className="dark:text-white text-[#0C0E16] font-bold text-[16px] leading-[24px]">
                       <span className="text-[#7E88C3]">&#35;</span>
-                      {invoice.invoiceId}
+                      <span className="dark:text-[#fff]">
+                        {invoice.invoiceId
+                          ? invoice.invoiceId
+                          : "Backend Problem"}
+                      </span>
                     </span>
                     <span className="text-[12px] leading-[15px] text-[#7E88C3] dark:text-[#DFE3FA] font-normal">
                       {invoice.description}
@@ -211,35 +205,51 @@ function Details() {
                 </div>
               </div>
               <div className="p-8 rounded-t-2xl mt-8">
-                <div className=" bg-[#F9FAFE]">
+                <div className="dark:bg-slate-900 dark:text-white">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="w-[100px]">Item Name</TableHead>
-                        <TableHead>QTY.</TableHead>
-                        <TableHead>Price</TableHead>
-                        <TableHead className="text-right">Total</TableHead>
+                        <TableHead className="w-[100px] text-indigo-300 dark:text-indigo-100">
+                          Item Name
+                        </TableHead>
+                        <TableHead className="text-indigo-300 dark:text-indigo-100">
+                          QTY.
+                        </TableHead>
+                        <TableHead className="text-indigo-300 dark:text-indigo-100">
+                          Price
+                        </TableHead>
+                        <TableHead className="text-right text-indigo-300 dark:text-indigo-100">
+                          Total
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium">
-                          Banner Design
-                        </TableCell>
-                        <TableCell classNametext="text-[#7E88C3]">1</TableCell>
-                        <TableCell classNametext="text-[#7E88C3]">
-                          £ 156.00
-                        </TableCell>
-                        <TableCell className="text-right font-medium">
-                          £ 156.00
-                        </TableCell>
-                      </TableRow>
+                      {invoice.items.map((item, index) => {
+                        return (
+                          <TableRow>
+                            <TableCell className="font-medium">
+                              {item.name}
+                            </TableCell>
+                            <TableCell className=" text-indigo-300 dark:text-indigo-100">
+                              {item.quantity}
+                            </TableCell>
+                            <TableCell className=" text-indigo-300 dark:text-indigo-100">
+                              £ {item.price}
+                            </TableCell>
+                            <TableCell className="text-right font-medium">
+                              £ {item.total}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                       <TableRow>
                         <TableCell className="font-medium">
                           Email Design
                         </TableCell>
-                        <TableCell classNametext="text-[#7E88C3]">2</TableCell>
-                        <TableCell classNametext="text-[#7E88C3]">
+                        <TableCell className=" text-indigo-300 dark:text-indigo-100">
+                          2
+                        </TableCell>
+                        <TableCell className=" text-indigo-300 dark:text-indigo-100">
                           £ 200.00
                         </TableCell>
                         <TableCell className="text-right font-medium">

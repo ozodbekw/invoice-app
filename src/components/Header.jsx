@@ -45,7 +45,9 @@ function Header() {
       <div className="base-container flex items-center justify-between py-10">
         <div>
           <h1 className="font-bold text-[32px]">Invoices</h1>
-          <p className="text-[12px]">There are 7 total invoices</p>
+          <p className="text-[12px]">
+            There are {items.length} total invoices
+          </p>
         </div>
         <div className="flex gap-10">
           <DropdownMenu>
