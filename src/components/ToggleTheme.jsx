@@ -25,9 +25,12 @@ function ToggleTheme() {
     let isDark;
     if (html.dataset.theme.startsWith("dark-")) {
       isDark = true;
+      html.classList.remove("dark");
     } else {
+      html.classList.add("dark");
       isDark = false;
     }
+    setDark(isDark);
 
     if (mode === "theme") {
       if (isDark) {
