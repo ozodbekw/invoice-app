@@ -1,20 +1,55 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import Details from "./pages/Details";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import { Home, Details, Login, Register } from "./pages";
 import MainLayout from "./layouts/MainLayout";
+import { useDispatch, useSelector } from "react-redux";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { auth } from "./firebase/config";
+import { isAuthReady, login } from "./app/features/userSlice";
 
 function App() {
+  const { user, isAuth } = useSelector((s) => s.user);
+  const dispatch = useDispatch();
+
+  if (user) {
+    <Navigate to="/" />;
+  } else {
+    <Navigate to="/login" />;
+  }
+
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: user ? <MainLayout /> : <Navigate to="/login" />,
       children: [
         { index: true, element: <Home /> },
         { path: "/:id", element: <Details /> },
       ],
     },
+    {
+      path: "login",
+      element: user ? <Navigate to="/" /> : <Login />,
+    },
+    {
+      path: "register",
+      element: user ? <Navigate to="/" /> : <Register />,
+    },
   ]);
-  return <RouterProvider router={routes} />;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(login(user));
+      }
+      dispatch(isAuthReady());
+    });
+  });
+  return <>{isAuth && <RouterProvider router={routes} />}</>;
 }
 
 export default App;

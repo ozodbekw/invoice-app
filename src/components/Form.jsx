@@ -46,7 +46,7 @@ function Form({ info, setSheetOpen }) {
     paymentTerms,
   } = info || {};
 
-  const { updateInvoices } = useAppStore();
+  const { updateInvoices, setInvoices } = useAppStore();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -73,6 +73,7 @@ function Form({ info, setSheetOpen }) {
     result.items = zustandItems;
 
     const readyData = propareData(result);
+
     setSending({
       mode: e.nativeEvent.submitter.id === "edit" ? "edit" : "add",
       data: readyData,
@@ -86,7 +87,7 @@ function Form({ info, setSheetOpen }) {
         setLoading(true);
         addInvoice(sending.data)
           .then((res) => {
-            updateInvoices(res);
+            setInvoices([res], "dynamic");
             toast.success("Successfully added ✅");
             setSheetOpen(false);
             navigate("/");
