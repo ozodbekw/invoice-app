@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Details from "./pages/Details";
 import MainLayout from "./layouts/MainLayout";
@@ -14,7 +13,6 @@ function App() {
         { path: "/:id", element: <Details /> },
       ],
     },
-    { path: "/*", element: <NotFound /> },
   ]);
   return <RouterProvider router={routes} />;
 }

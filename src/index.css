@@ -77,7 +77,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "League Spartan";
   }
+}
+
+input {
+  font-family: inherit;
 }
 
 .base-container {

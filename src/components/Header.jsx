@@ -1,3 +1,4 @@
+// shadcn
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -5,20 +6,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import { Button, buttonVariants } from "./ui/button";
-import { useEffect, useState } from "react";
 import { Checkbox } from "./ui/checkbox";
+import { Button, buttonVariants } from "./ui/button";
+
+// react hooks
+import { useEffect, useState } from "react";
 import { queryGenerator } from "../lib/utils";
+
+// icons
 import { ArrowBigDown, Plus } from "lucide-react";
+
+// zustand
 import { useAppStore } from "../lib/zustand";
 
 function Header() {
@@ -27,7 +25,7 @@ function Header() {
     paid: false,
     pending: false,
   });
-  const { setFilter } = useAppStore();
+  const { setFilter, setSheetOpen } = useAppStore();
 
   function handleChange(key) {
     setItems((prev) => {
@@ -45,9 +43,7 @@ function Header() {
       <div className="base-container flex items-center justify-between py-10">
         <div>
           <h1 className="font-bold text-[32px]">Invoices</h1>
-          <p className="text-[12px]">
-            There are {items.length} total invoices
-          </p>
+          <p className="text-[12px]">There are {items.length} total invoices</p>
         </div>
         <div className="flex gap-10">
           <DropdownMenu>
@@ -82,30 +78,9 @@ function Header() {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
-          {/* <Button></Button> */}
-          <Sheet className="w-[800px]">
-            <SheetTrigger className={buttonVariants({ variant: "default" })}>
-              <Plus /> New invoice
-            </SheetTrigger>
-            <SheetContent
-              className="w-[800px] sm:w-[540px] ml-[78px]"
-              side="left"
-            >
-              <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription className="">
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers. Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-                  voluptatum illo expedita beatae quod asperiores soluta fugiat
-                  assumenda, quaerat voluptate eos odio nobis nemo dolorum
-                  nesciunt placeat deleniti iusto sit? Iste perferendis tenetur
-                  soluta, eos quibusdam minima asperiores qui id doloremque.
-                  Doloribus est a laborum modi nisi? Magnam, voluptates omnis.
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
+          <Button onClick={setSheetOpen}>
+            <Plus /> New invoice
+          </Button>
         </div>
       </div>
     </header>

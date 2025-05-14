@@ -1,10 +1,18 @@
-import { Link, useParams } from "react-router-dom";
-import { getInvoice } from "../request";
+// router-dom
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+// requests
+import { deleteById, getInvoice, updateById } from "../request";
+
+// react hooks
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
+
+// components
 import Status from "../components/Status";
+
+// shadcn
+import { Card, CardContent } from "../components/ui/card";
 import { Button, buttonVariants } from "../components/ui/button";
-import { BallTriangle } from "react-loader-spinner";
 import {
   Dialog,
   DialogContent,
@@ -16,29 +24,94 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import { ArrowLeft } from "lucide-react";
 import { DialogClose } from "@radix-ui/react-dialog";
+
+// icons
+import { ArrowLeft } from "lucide-react";
+
+// toaster
+import { toast } from "sonner";
+
+// zustand
+import { useAppStore } from "../lib/zustand";
+
+// function formatDate(dateStr) {
+//   const months = [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec",
+//   ];
+
+//   const [year, month, day] = dateStr.split("-");
+//   const formatted = `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
+//   return formatted;
+// }
 
 function Details() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [invoice, setInvoice] = useState([]);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
+
+  const { updateInvoices, setSheetOpen, setEditedData } = useAppStore();
+
+  function handleDelete(id) {
+    setDeleteLoading(true);
+    deleteById(id)
+      .then((res) => {
+        navigate("/");
+      })
+      .catch(({ message }) => {
+        toast.error(message);
+      })
+      .finally(() => {
+        setDeleteLoading(false);
+      });
+  }
+
+  function handleUpdate(id, data) {
+    setUpdateLoading(true);
+    updateById(id, data)
+      .then((res) => {
+        updateInvoices(res);
+        navigate("/");
+      })
+      .catch(({ message }) => {
+        toast.error(message);
+      })
+      .finally(() => {
+        setUpdateLoading(false);
+      });
+  }
+
+  function handleEdit(data) {
+    setEditedData(data);
+    setSheetOpen();
+  }
 
   useEffect(() => {
     setLoading(true);
-    getInvoice(id, "/invoices")
+    getInvoice(id)
       .then((res) => {
         setInvoice(res);
-        console.log(res);
       })
       .catch(({ message }) => {
         console.log(message);
@@ -61,34 +134,6 @@ function Details() {
     return <p>{error}</p>;
   }
 
-  function formatDate(dateStr) {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    const [year, month, day] = dateStr.split("-");
-    const formatted = `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
-    return formatted;
-  }
-  function formatNumber(value) {
-    return Number(value).toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-  }
-
-  console.log(invoice);
   return (
     <div className="py-5">
       <div className="base-container">
@@ -106,7 +151,14 @@ function Details() {
               </span>
             </div>
             <div className="flex gap-3">
-              <Button variant="ghost">Edit</Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  handleEdit(invoice);
+                }}
+              >
+                Edit
+              </Button>
               <Dialog>
                 <DialogTrigger
                   className={buttonVariants({ variant: "destructive" })}
@@ -117,8 +169,8 @@ function Details() {
                   <DialogHeader>
                     <DialogTitle>Confirm Deletion</DialogTitle>
                     <DialogDescription>
-                      Are you sure you want to delete invoice #
-                      {invoice.invoiceId}? This action cannot be undone.
+                      Are you sure you want to delete invoice #{invoice.id}?
+                      This action cannot be undone.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="flex gap-3 justify-end">
@@ -127,11 +179,26 @@ function Details() {
                     >
                       Cancel
                     </DialogClose>
-                    <Button variant={"destructive"}>Delete</Button>
+                    <Button
+                      variant={"destructive"}
+                      onClick={() => {
+                        handleDelete(id);
+                      }}
+                      disabled={deleteLoading}
+                    >
+                      {deleteLoading ? "Loading..." : "Delete"}
+                    </Button>
                   </div>
                 </DialogContent>
               </Dialog>
-              <Button variant="default">Mark as paid</Button>
+              {invoice.status === "pending" && (
+                <Button
+                  variant="default"
+                  onClick={() => handleUpdate(invoice.id, { status: "paid" })}
+                >
+                  {updateLoading ? "Loading" : "Mark as paid"}
+                </Button>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -143,11 +210,7 @@ function Details() {
                   <div className="flex flex-col gap-2">
                     <span className="dark:text-white text-[#0C0E16] font-bold text-[16px] leading-[24px]">
                       <span className="text-[#7E88C3]">&#35;</span>
-                      <span className="dark:text-[#fff]">
-                        {invoice.invoiceId
-                          ? invoice.invoiceId
-                          : "Backend Problem"}
-                      </span>
+                      <span className="dark:text-[#fff]">{invoice.id}</span>
                     </span>
                     <span className="text-[12px] leading-[15px] text-[#7E88C3] dark:text-[#DFE3FA] font-normal">
                       {invoice.description}
@@ -168,7 +231,7 @@ function Details() {
                         Invoice Date
                       </span>
                       <h2 className="text-[#0C0E16] w-[96px] dark:text-white font-bold text-[15px] leading-[12px]">
-                        {formatDate(invoice.createdAt)}
+                        {invoice.createdAt}
                       </h2>
                     </div>
                     <div className="flex flex-col gap-3 w-[98px]">
@@ -176,7 +239,7 @@ function Details() {
                         Payment Due
                       </span>
                       <h2 className="text-[#0C0E16] dark:text-white font-bold text-[15px] leading-[12px] w-[120px]">
-                        {formatDate(invoice.paymentDue)}
+                        {invoice.paymentDue}
                       </h2>
                     </div>
                   </div>
@@ -226,7 +289,7 @@ function Details() {
                     <TableBody>
                       {invoice.items.map((item, index) => {
                         return (
-                          <TableRow>
+                          <TableRow key={index}>
                             <TableCell className="font-medium">
                               {item.name}
                             </TableCell>
@@ -242,26 +305,12 @@ function Details() {
                           </TableRow>
                         );
                       })}
-                      <TableRow>
-                        <TableCell className="font-medium">
-                          Email Design
-                        </TableCell>
-                        <TableCell className=" text-indigo-300 dark:text-indigo-100">
-                          2
-                        </TableCell>
-                        <TableCell className=" text-indigo-300 dark:text-indigo-100">
-                          £ 200.00
-                        </TableCell>
-                        <TableCell className="text-right font-medium">
-                          £ 400.00
-                        </TableCell>
-                      </TableRow>
                     </TableBody>
                   </Table>
                 </div>
                 <div className="flex justify-between bg-[#373B53] py-8 px-6 items-center rounded-b-2xl text-white">
                   <p>Amount Due</p>
-                  <h3>£ 556.00</h3>
+                  <h3>£ {invoice.total}</h3>
                 </div>
               </div>
             </CardContent>

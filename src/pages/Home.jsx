@@ -1,6 +1,6 @@
+// components
 import Header from "../components/Header";
 import InvoiceCards from "../components/InvoiceCards";
-import Sidebar from "../components/Sidebar";
 
 function Home() {
   return (

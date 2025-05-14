@@ -1,8 +1,8 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // get all
-export async function getInvoices(route = "/invoices", query = "") {
-  const req = await fetch(baseUrl + route + (query ? `?status=${query}` : ""));
+export async function getInvoices(query = "") {
+  const req = await fetch(baseUrl + (query ? `?status=${query}` : ""));
 
   if (req.status === 200) {
     const result = req.json();
@@ -13,8 +13,8 @@ export async function getInvoices(route = "/invoices", query = "") {
 }
 
 // get by id
-export async function getInvoice(id, route = "/invoices") {
-  const req = await fetch(baseUrl + route + `/${id}`);
+export async function getInvoice(id) {
+  const req = await fetch(baseUrl + `/${id}`);
 
   if (req.status === 200) {
     const result = req.json();
@@ -25,8 +25,8 @@ export async function getInvoice(id, route = "/invoices") {
 }
 
 // delete
-export async function deleteById() {
-  const req = await fetch(baseUrl + `/invoice${id}`, {
+export async function deleteById(id) {
+  const req = await fetch(baseUrl + `/${id}`, {
     method: "DELETE",
   });
 
@@ -39,8 +39,11 @@ export async function deleteById() {
 
 // update by id
 export async function updateById(id, newData) {
-  const req = await fetch(baseUrl + `/invoice${id}`, {
+  const req = await fetch(baseUrl + `/${id}`, {
     method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(newData),
   });
 
@@ -52,10 +55,13 @@ export async function updateById(id, newData) {
   }
 }
 
-// add by id
+// add new invoice
 export async function addInvoice(data) {
   const req = await fetch(baseUrl, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   });
 
