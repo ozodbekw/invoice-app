@@ -16,11 +16,13 @@ function App() {
   const { user, isAuth } = useSelector((s) => s.user);
   const dispatch = useDispatch();
 
-  if (user) {
-    <Navigate to="/" />;
-  } else {
-    <Navigate to="/login" />;
-  }
+  useEffect(() => {
+    if (user) {
+      <Navigate to="/" />;
+    } else {
+      <Navigate to="/login" />;
+    }
+  }, [user]);
 
   const routes = createBrowserRouter([
     {

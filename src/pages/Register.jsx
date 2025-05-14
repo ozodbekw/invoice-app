@@ -21,7 +21,7 @@ function Register() {
     register(email, password, displayName);
   };
   return (
-    <div className="mx-auto w-[500px] p-6 rounded-2xl bg-[#fafafa] mt-25">
+    <div className="mx-auto w-[500px] p-6 rounded-2xl dark:bg-[#444444] bg-[#fafafa] mt-25">
       <div className="login-form">
         <h1 className="text-4xl font-bold mb-8">Sign Up</h1>
         <form onSubmit={handleRegister}>
