@@ -68,7 +68,7 @@ function ToggleTheme() {
 
   return (
     <div className="flex gap-5 md:flex-col z-30">
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className={buttonVariants({ variant: "secondary" })}>
             <span className="md:hidden"> Change theme</span> <ArrowBigDown />
@@ -92,7 +92,7 @@ function ToggleTheme() {
             })}
           </div>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
       <Button onClick={() => handleTheme(theme, "dark")}>
         {dark ? <Sun /> : <Moon />}
       </Button>

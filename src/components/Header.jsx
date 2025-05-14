@@ -25,7 +25,7 @@ function Header() {
     paid: false,
     pending: false,
   });
-  const { setFilter, setSheetOpen } = useAppStore();
+  const { setFilter, setSheetOpen,invoices } = useAppStore();
 
   function handleChange(key) {
     setItems((prev) => {
@@ -43,7 +43,7 @@ function Header() {
       <div className="base-container flex-col md:flex-row gap-5 md:gap-0 flex items-center justify-between py-10">
         <div>
           <h1 className="font-bold text-[32px]">Invoices</h1>
-          <p className="text-[12px]">There are {items.length} total invoices</p>
+          <p className="text-[12px]">There are {invoices && invoices.length} total invoices</p>
         </div>
         <div className="flex gap-10">
           <DropdownMenu>
