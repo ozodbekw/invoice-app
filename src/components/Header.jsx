@@ -78,8 +78,12 @@ function Header() {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={setSheetOpen}>
-            <Plus /> New invoice
+          <Button
+            onClick={setSheetOpen}
+            className="rounded-[24px] bg-[#7C5DFA] hover:bg-[#9277FF] text-white"
+          >
+            <Plus className="border-1 border-white rounded-full bg-white text-[#7C5DFA]" />
+            New invoice
           </Button>
         </div>
       </div>

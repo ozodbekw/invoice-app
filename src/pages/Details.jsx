@@ -73,6 +73,8 @@ function Details() {
 
   const { updateInvoices, setSheetOpen, setEditedData } = useAppStore();
 
+  console.log(invoice);
+
   function handleDelete(id) {
     setDeleteLoading(true);
     deleteById(id)
