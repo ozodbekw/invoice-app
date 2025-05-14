@@ -144,7 +144,7 @@ function Details() {
           <ArrowLeft className="w-5" /> Go Home
         </Link>
         <Card>
-          <CardContent className="flex justify-between items-center">
+          <CardContent className="flex md:flex-row gap-5 md:gap-0 flex-col justify-between items-center">
             <div>
               <span className="inline-flex gap-4 items-center">
                 Status: <Status status={invoice.status} />
@@ -152,6 +152,7 @@ function Details() {
             </div>
             <div className="flex gap-3">
               <Button
+                className="rounded-[24px]"
                 variant="ghost"
                 onClick={() => {
                   handleEdit(invoice);
@@ -160,9 +161,7 @@ function Details() {
                 Edit
               </Button>
               <Dialog>
-                <DialogTrigger
-                  className={buttonVariants({ variant: "destructive" })}
-                >
+                <DialogTrigger className="rounded-[24px] bg-[#EC5757] text-white px-6">
                   Delete
                 </DialogTrigger>
                 <DialogContent>

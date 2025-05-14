@@ -22,7 +22,7 @@ function Sidebar() {
   const { setSheetOpen, sheetOpen, editedData } = useAppStore();
   return (
     <>
-      <div className="bg-[#373B53] flex items-center justify-between md:flex-col md:fixed md:h-full md:left-0 md:w-[78px] md:top-0 md:bottom-0 md:z-[99]">
+      <div className="bg-[#373B53] flex items-center justify-between md:flex-col md:fixed md:h-full md:left-0 md:w-[78px] md:top-0 md:bottom-0 md:z-[99] rounded-b-[12px] md:rounded-r-[12px]">
         <div>
           <img src={Logo} alt="site logo" />
         </div>

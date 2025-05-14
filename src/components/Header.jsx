@@ -40,7 +40,7 @@ function Header() {
 
   return (
     <header>
-      <div className="base-container flex items-center justify-between py-10">
+      <div className="base-container flex-col md:flex-row gap-5 md:gap-0 flex items-center justify-between py-10">
         <div>
           <h1 className="font-bold text-[32px]">Invoices</h1>
           <p className="text-[12px]">There are {items.length} total invoices</p>
@@ -78,8 +78,12 @@ function Header() {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button onClick={setSheetOpen}>
-            <Plus /> New invoice
+          <Button
+            onClick={setSheetOpen}
+            className="rounded-[24px] bg-[#7C5DFA] hover:bg-[#9277FF] text-white"
+          >
+            <Plus className="border-1 border-white rounded-full bg-white text-[#7C5DFA]" />
+            New invoice
           </Button>
         </div>
       </div>

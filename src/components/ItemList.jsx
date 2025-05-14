@@ -88,7 +88,7 @@ function ItemList({ info }) {
 
   return (
     <div className="flex flex-col">
-      <h2>Item List</h2>
+      <h2 className="font-bold text-[#777F98] text-2xl mt-8 mb-4">Item List</h2>
       <div className="flex  items-center gap-4 justify-between">
         <span>Item Name</span>
         <span>Name</span>

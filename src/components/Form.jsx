@@ -58,9 +58,6 @@ function Form({ info, setSheetOpen }) {
       result.status = e.nativeEvent.submitter.id;
     }
 
-    if (e.nativeEvent.submitter.id === "edit") {
-    }
-
     const ignoreKeys = ["quantity", "price", "name", "description"];
 
     formData.forEach((value, key) => {
@@ -85,12 +82,15 @@ function Form({ info, setSheetOpen }) {
   useEffect(() => {
     if (sending) {
       if (sending.mode === "add") {
+        console.log(sending.data);
         setLoading(true);
-        addInvoice(sending)
+        addInvoice(sending.data)
           .then((res) => {
             updateInvoices(res);
             toast.success("Successfully added ✅");
             setSheetOpen(false);
+            navigate("/");
+            console.log(res.data);
           })
           .catch(({ message }) => {
             toast.error(message);
@@ -106,7 +106,7 @@ function Form({ info, setSheetOpen }) {
             updateInvoices(res);
             toast.success("Successfully edited ✅");
             setSheetOpen(false);
-            navigate(-1);
+            navigate("/");
           })
           .catch(({ message }) => {
             toast.error(message);
@@ -123,7 +123,7 @@ function Form({ info, setSheetOpen }) {
     <form onSubmit={handleSubmit} className="p-4 pt-[50px]">
       {/* Bill From */}
       <div className="mb-10">
-        <h3 className="text-2xl font-medium">Bill From</h3>
+        <h3 className="text-xl font-medium text-[#7C5DFA] mb-6">Bill From</h3>
         <div className="flex flex-col">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="senderAddress-street">Street Address</Label>
@@ -173,7 +173,7 @@ function Form({ info, setSheetOpen }) {
       </div>
       {/* Bill To */}
       <div className="mb-10">
-        <h3 className="text-2xl font-medium mb-5">Bill To</h3>
+        <h3 className="text-xl font-medium text-[#7C5DFA] mb-6">Bill To</h3>
         <div className="flex flex-col gap-4 mb-5">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="clientName">Client’s Name</Label>
@@ -243,8 +243,8 @@ function Form({ info, setSheetOpen }) {
       </div>
 
       {/* Date */}
-      <div>
-        <div className="flex gap-4">
+      <div className="mb-5">
+        <div className="flex gap-4 mb-5">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="createdAt">Invoice Date</Label>
             <Input
@@ -286,7 +286,7 @@ function Form({ info, setSheetOpen }) {
       <ItemList info={info && info.items} />
 
       {info ? (
-        <div className="flex justify-end gap-5">
+        <div className="flex justify-end gap-5 mt-10">
           <Button type="button" variant="outline" onClick={setSheetOpen}>
             Cancel
           </Button>
@@ -295,8 +295,8 @@ function Form({ info, setSheetOpen }) {
           </Button>
         </div>
       ) : (
-        <div className="flex justify-end gap-5">
-          <Button type="button" variant="outline">
+        <div className="flex justify-end gap-5 mt-10">
+          <Button onClick={setSheetOpen} type="button" variant="outline">
             Discard
           </Button>
           <Button id="draft" variant="secondary">
