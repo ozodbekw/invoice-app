@@ -31,7 +31,7 @@ function MyCard({
       className="hover:border-indigo-500 cursor-pointer border-2 border-transparent transition-colors"
     >
       <CardHeader>
-        <div className="flex items-center justify-between relative">
+        <div className="grid grid-cols-2 md:flex items-center justify-between relative">
           <CardTitle className="font-bold text-[12px] leading-[15px]">
             <span className="text-indigo-300">#</span>
             {id}

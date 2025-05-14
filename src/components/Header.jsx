@@ -40,7 +40,7 @@ function Header() {
 
   return (
     <header>
-      <div className="base-container flex items-center justify-between py-10">
+      <div className="base-container flex-col md:flex-row gap-5 md:gap-0 flex items-center justify-between py-10">
         <div>
           <h1 className="font-bold text-[32px]">Invoices</h1>
           <p className="text-[12px]">There are {items.length} total invoices</p>
