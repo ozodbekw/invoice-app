@@ -1,15 +1,21 @@
+// shadcn
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+// components
 import Status from "./Status";
+
+// icons
 import { ArrowRight } from "lucide-react";
+
+// router-dom
 import { useNavigate } from "react-router-dom";
 
 function MyCard({
-  invoiceId = "RT3080",
   createdAt = "Due  19 Aug 2021",
   clientName = "Jensen Huang",
   total = "1,800.90",
@@ -28,7 +34,7 @@ function MyCard({
         <div className="flex items-center justify-between relative">
           <CardTitle className="font-bold text-[12px] leading-[15px]">
             <span className="text-indigo-300">#</span>
-            {invoiceId}
+            {id}
           </CardTitle>
           <CardDescription className="text-[12px] leading-[15px]">
             {createdAt}

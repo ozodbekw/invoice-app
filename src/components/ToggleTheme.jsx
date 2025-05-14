@@ -1,5 +1,13 @@
+// react hooks
+import { useEffect, useState } from "react";
+
+// shadcn icons
 import { ArrowBigDown, Moon, Sun } from "lucide-react";
+
+// zustand
 import { useAppStore } from "../lib/zustand";
+
+// shadcn
 import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
@@ -8,7 +16,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { useEffect, useState } from "react";
 
 function ToggleTheme() {
   const [dark, setDark] = useState(

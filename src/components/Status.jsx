@@ -1,6 +1,7 @@
+// shadcn
 import { buttonVariants } from "./ui/button";
 
-function Status({ status = "paid" }) {
+function Status({ status = "draft" }) {
   const style = {
     paid: {
       text: "text-[#33D69F]",
