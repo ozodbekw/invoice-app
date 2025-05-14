@@ -17,8 +17,12 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
+import { useLogout } from "../hooks/useLogout";
 
 function Sidebar() {
+  const { signout, isPending } = useLogout();
   const { setSheetOpen, sheetOpen, editedData } = useAppStore();
   return (
     <>
@@ -27,6 +31,13 @@ function Sidebar() {
           <img src={Logo} alt="site logo" />
         </div>
         <div className=" flex items-center gap-4 pr-5 md:pr-0 md:flex-col">
+          <Button
+            className="rounded-full cursor-pointer"
+            onClick={() => signout()}
+            disabled={isPending}
+          >
+            <LogOut />
+          </Button>
           <ToggleTheme />
           <Avatar className="mt-5 mb-5 mx-auto">
             <AvatarImage src={userImage} alt="@shadcn" />

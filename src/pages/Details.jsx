@@ -192,6 +192,7 @@ function Details() {
               </Dialog>
               {invoice.status === "pending" && (
                 <Button
+                  className="rounded-3xl bg-[#7C5DFA] text-white"
                   variant="default"
                   onClick={() => handleUpdate(invoice.id, { status: "paid" })}
                 >
