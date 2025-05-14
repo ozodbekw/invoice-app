@@ -73,8 +73,6 @@ function Details() {
 
   const { updateInvoices, setSheetOpen, setEditedData } = useAppStore();
 
-  console.log(invoice);
-
   function handleDelete(id) {
     setDeleteLoading(true);
     deleteById(id)
@@ -154,6 +152,7 @@ function Details() {
             </div>
             <div className="flex gap-3">
               <Button
+                className="rounded-[24px]"
                 variant="ghost"
                 onClick={() => {
                   handleEdit(invoice);
@@ -162,9 +161,7 @@ function Details() {
                 Edit
               </Button>
               <Dialog>
-                <DialogTrigger
-                  className={buttonVariants({ variant: "destructive" })}
-                >
+                <DialogTrigger className="rounded-[24px] bg-[#EC5757] text-white px-6">
                   Delete
                 </DialogTrigger>
                 <DialogContent>
