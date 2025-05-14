@@ -13,14 +13,8 @@ import { auth } from "./firebase/config";
 import { isAuthReady, login } from "./app/features/userSlice";
 
 function App() {
-  const { user, isAuth } = useSelector((s) => s.user);
+  const { user, isAuth } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-
-  if (user) {
-    <Navigate to="/" />;
-  } else {
-    <Navigate to="/login" />;
-  }
 
   const routes = createBrowserRouter([
     {

@@ -18,7 +18,6 @@ export const useLogin = () => {
       const req = await signInWithEmailAndPassword(auth, email, password);
       const user = req.user;
       dispatch(_login(user));
-      console.log(user);
       setUser(user);
     } catch (err) {
       console.error("Registration error:", err.message);
