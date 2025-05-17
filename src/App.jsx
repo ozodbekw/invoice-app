@@ -26,11 +26,11 @@ function App() {
       ],
     },
     {
-      path: "login",
+      path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
     },
     {
-      path: "register",
+      path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
     },
   ]);
@@ -42,7 +42,7 @@ function App() {
       }
       dispatch(isAuthReady());
     });
-  });
+  }, []);
   return <>{isAuth && <RouterProvider router={routes} />}</>;
 }
 
